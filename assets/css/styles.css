@@ -1,0 +1,299 @@
+/* body{
+    background-color: #141414;
+    color: #f8f8f8;
+} */
+
+img.logo {
+    max-width: 50px;
+    max-height: px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    margin-top: 20px;
+    height: 100px;
+}
+
+.card-container {
+    margin-bottom: 20px;
+}
+
+.card {
+    max-height: 220px;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.card-title{
+    font-size: 22px;
+}
+
+
+.card-subtitle{
+    font-size: 16px;
+}
+
+.card-text{
+    font-size: 14px;
+}
+.smaller-description {
+    font-size: 14px;
+}
+
+.sidebar-card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #fff;
+}
+
+.footer {
+    background-color: #dddddd;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-top: 13px;
+    color: #000; 
+}
+
+/* Убираем подчеркивание и делаем текст обычным при наведении */
+.footer .col-md-3 h6 a {
+    text-decoration: none !important;
+    font-weight: normal !important;
+    color: #000; 
+}
+
+/* Делаем текст жирным при наведении */
+.footer .col-md-3 h6 a:hover {
+    font-weight: bold !important;
+    color: #000; 
+}
+
+.footer h2 {
+    color: #000; 
+    font-size: 16px;
+}
+
+
+
+
+body.login-page {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.login-container {
+    grid-row: 2 / 3;
+    grid-column: 3 / 4; 
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 80%; /* Уменьшение ширины на 20% */
+    margin: 0 auto; /* Центрирование по горизонтали */
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.login-container .form-group {
+    margin-bottom: 10px;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-container input[type="number"],
+.login-container input[type="password"],
+.login-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.login-container button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    text-decoration: none;
+}
+
+.login-container p {
+    margin-top: 10px;
+}
+
+.login-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+
+.login-page .back-button {
+    white-space: nowrap;
+    background: none; /* Убираем фон */
+    color: #fff; /* Цвет текста серый */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none; /* Убирает подчеркивание для ссылки */
+    font-weight: normal; /* Начальный стиль шрифта */
+    font-size: 18px; /* Начальный размер шрифта */
+}
+
+.login-page .back-button:hover {
+    white-space: nowrap;
+    font-weight: bold; /* Сделать текст жирным при наведении */
+    font-size: 18px; /* Увеличить размер шрифта при наведении */
+    color: #fff; /* Цвет текста серый при наведении */
+    text-decoration: none;
+}
+
+.grid-container {
+    /* background-image: url("https://foni.club/uploads/posts/2023-02/1677587028_foni-club-p-magicheskaya-bitva-satoru-godzho-art-19.jpg");
+    background-image: url("https://sun9-56.userapi.com/impg/EgZTCJ0LRnq98Swx8fSeWMUYWo4TEGJqKOvt3Q/hsL-1WWF4l0.jpg?size=2560x1440&quality=96&sign=f4263c53a265858407a8eb2d098ad8e7&type=album");
+    background-image: url("../images/login.jpg"); */
+    background-size: cover;
+    background-position: center;
+}
+
+.login-page {
+    background-image: url("../images/login.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+form button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+.back-button {
+    background: none; /* Убираем фон */
+    color: #666; /* Цвет текста серый */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none; /* Убирает подчеркивание для ссылки */
+    font-weight: normal; /* Начальный стиль шрифта */
+    font-size: 18px; /* Начальный размер шрифта */
+
+}
+
+.back-button:before {
+    content: "\2190"; /* Стрелочка влево (Юникод символ) */
+    margin-right: 5px; /* Отступ между стрелочкой и текстом */
+}
+
+.back-button:hover {
+    font-weight: bold; /* Сделать текст жирным при наведении */
+    font-size: 18px; /* Увеличить размер шрифта при наведении */
+    color: #444; /* Цвет текста серый при наведении */
+    text-decoration: none;
+}
+
+.question-mark {
+    color: blue;
+    cursor: pointer;
+}
+
+table.table-bordered tbody tr td,
+table.table-bordered thead tr th {
+    border: 1px solid #000 !important;
+}
+
+/* Уменьшаем отступы для списка */
+.sidebar-card ul {
+    padding: 0;
+    list-style: none;
+}
+
+/* Сдвигаем текст в центре */
+.sidebar-card h5 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Убираем оформление текста и кружочки */
+.sidebar-card ul li a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: normal;
+}
+
+/* Делаем текст полужирным при наведении */
+.sidebar-card ul li a:hover {
+    font-weight: bold;
+}
+
+
+.error {
+    color: #f00;
+    background-color: #ffbbbb;
+    padding: 5px;
+    border: 1px solid #f00;
+}
+.conf {
+    color: #0f0;
+    background-color: #bbffbb;
+    padding: 5px;
+    border: 1px solid #0f0;
+}
