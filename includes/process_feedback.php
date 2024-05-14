@@ -13,9 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             VALUES ('$senderName', '$senderEmail', '$subject', '$messageText')";
 
     if (mysqli_query($connection, $sql)) {
-        echo "Сообщение успешно отправлено!";
+        header("Location: ../feedback.php?status=success");
     } else {
-        echo "Ошибка при отправке сообщения: " . mysqli_error($connection);
+        header("Location: ../feedback.php?status=error");
     }
+    exit();
 }
 ?>

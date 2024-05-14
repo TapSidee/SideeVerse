@@ -36,10 +36,14 @@ session_start();
                 <div class="col-md-4 mt-2">
                     <?php if(isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
                         <?php if($_SESSION['role'] === 'user'): ?>
+                            <a href="profile.php" class="btn btn-primary">Profile</a>
                             <a href="logout.php" class="btn btn-primary">Logout</a>
                         <?php elseif($_SESSION['role'] === 'admin'): ?>
                             <a href="administration.php" class="btn btn-primary">Administration</a>
                             <a href="logout.php" class="btn btn-primary">Logout</a>
+                        <?php endif; ?>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+
                         <?php endif; ?>
                     <?php else: ?>
                         <a href="login.php" class="btn btn-primary">Authorization</a>

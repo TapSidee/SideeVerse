@@ -35,8 +35,8 @@ if($connection == false)
                 <h1><img src="assets/images/logo.png" alt="logo" class="logo">   LibrarySidee - Student library</h1>
                 </div>
                 <div class="col-md-4 mt-2">
-                    <a href="administration.php" class="btn btn-primary">Administration</a>
-                    <a href="login.php" class="btn btn-primary">Authorization</a>
+                    <!-- <a href="administration.php" class="btn btn-primary">Administration</a>
+                    <a href="login.php" class="btn btn-primary">Authorization</a> -->
                 </div>
             </div>
         </div>

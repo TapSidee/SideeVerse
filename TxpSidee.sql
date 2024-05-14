@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 14 2024 г., 16:24
+-- Время создания: Май 14 2024 г., 20:05
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.0.22
 
@@ -161,8 +161,17 @@ CREATE TABLE `Feedback` (
   `sender_email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `subject` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `message_text` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `submission_datetime` datetime DEFAULT NULL
+  `submission_datetime` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `Feedback`
+--
+
+INSERT INTO `Feedback` (`id`, `sender_name`, `sender_email`, `subject`, `message_text`, `submission_datetime`) VALUES
+(3, 'Klim', 'erwe@mail.ru', 'Похвала от японских самураев', 'много поздравлений должно быть тут\r\n', '2024-05-14 18:35:15'),
+(4, 'Deko', 'dddfg@gmail.com', 'Совет по улучшению', 'много текста с предложениями улучшения проекта', '2024-05-14 18:53:33'),
+(5, 'Liam', 'lr@mia.ru', 'Совет по дизайну', 'много мнений о дизайне проекта', '2024-05-14 18:57:18');
 
 -- --------------------------------------------------------
 
@@ -243,20 +252,22 @@ CREATE TABLE `Users` (
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user'
+  `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'default.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `Users`
 --
 
-INSERT INTO `Users` (`id_user`, `first_name`, `last_name`, `username`, `email`, `password`, `role`) VALUES
-(5501, 'Петр', 'Петров', 'ippo', 'ippo@gmail.com', '480365697eece70e08de3a5060e51334', 'user'),
-(5502, 'Анна', 'Сидорова', 'annasdr', 'sdrnn@mail.ru', 'a1f00dddbabf086e7ddbe15de572fd7f', 'user'),
-(5503, 'Мария', 'Смирнова', 'lllfjdw', 'lllfjdw@mail.ru', '5af3726edbe019a3ad9f64e82442e282', 'user'),
-(5504, 'Алексей', 'Сульянов', 'sln_tpsd', 'sln_tpsd@gmail.com', '5ca179c31c2ef92572d636db4770de0d', 'admin'),
-(5505, 'Иван', 'Игнатьев', 'lovv66', 'lovv66@gmail.com', 'b57c42e9bda9e8da99dcd70125635541', 'user'),
-(5506, 'Николай', 'Дроздов', 'syigetsu', 'syigetsu@gmail.com', '6c30b25863d26833d08c615837176d56', 'admin');
+INSERT INTO `Users` (`id_user`, `first_name`, `last_name`, `username`, `email`, `password`, `role`, `avatar`) VALUES
+(5501, 'Петр', 'Петров', 'ippo', 'ippo@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', 'user', 'anim333.jpg'),
+(5502, 'Анна', 'Сидорова', 'annasdr', 'sdrnn@mail.ru', 'a1f00dddbabf086e7ddbe15de572fd7f', 'user', 'default.jpg'),
+(5503, 'Мария', 'Смирнова', 'lllfjdw', 'lllfjdw@mail.ru', '5af3726edbe019a3ad9f64e82442e282', 'user', 'default.jpg'),
+(5504, 'Алексей', 'Сульянов', 'sln_tpsd', 'sln_tpsd@gmail.com', '5ca179c31c2ef92572d636db4770de0d', 'admin', 'default.jpg'),
+(5505, 'Тимур', 'Волков', 'lovv66', 'lovv66@gmail.com', '3295c76acbf4caaed33c36b1b5fc2cb1', 'user', 'anim3422.jpg'),
+(5506, 'Николай', 'Дроздов', 'syigetsu', 'syigetsu@gmail.com', '6c30b25863d26833d08c615837176d56', 'admin', 'default.jpg'),
+(11214, 'Максим', 'Осинцев', 'HIBAKO', 'hiboba@mail.ru', '5e36941b3d856737e81516acd45edc50', 'admin', 'default.jpg');
 
 --
 -- Индексы сохранённых таблиц
@@ -334,7 +345,7 @@ ALTER TABLE `Country`
 -- AUTO_INCREMENT для таблицы `Feedback`
 --
 ALTER TABLE `Feedback`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `Genres`
@@ -352,7 +363,7 @@ ALTER TABLE `Publishers`
 -- AUTO_INCREMENT для таблицы `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11214;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11215;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

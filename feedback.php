@@ -21,39 +21,32 @@ session_start();
 
 <body>
 
-    <header>
+<header>
         <div class="header">
             <div class="row">
                 <div class="col-md-3 mt-2">
+                    <a href="index.php" class="back-button">На главную</a>
                 </div>
-                <!-- <div class="col-md-1">
-                    <div class="logo-container">
-                        <img src="assets/images/logo.jpg" alt="logo" class="logo">
-                    </div>
-                </div> -->
                 <div class="col-md-5 mt-2">
-                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> LibrarySidee - Student library</h1>
+                <h1><img src="assets/images/logo.png" alt="logo" class="logo">   LibrarySidee - Student library</h1>
                 </div>
                 <div class="col-md-4 mt-2">
-                    <?php if(isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
-                        <?php if($_SESSION['role'] === 'user'): ?>
-                            <a href="logout.php" class="btn btn-primary">Logout</a>
-                        <?php elseif($_SESSION['role'] === 'admin'): ?>
-                            <a href="administration.php" class="btn btn-primary">Administration</a>
-                            <a href="logout.php" class="btn btn-primary">Logout</a>
-                        <?php endif; ?>
-                    <?php else: ?>
-                        <a href="login.php" class="btn btn-primary">Authorization</a>
-                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </header>
 
-
-
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                <?php if (isset($_GET['status'])): ?>
+                    <?php if ($_GET['status'] == 'success'): ?>
+                        <div class="alert alert-success">Отзыв успешно отправлен! Спасибо за ваше мнение.</div>
+                    <?php elseif ($_GET['status'] == 'error'): ?>
+                        <div class="alert alert-danger">Произошла ошибка при отправке отзыва. Пожалуйста, попробуйте снова.</div>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </div>
             <div class="col-md-6">
                 <h2>Обратная связь</h2>
                 <form action="includes/process_feedback.php" method="POST">
@@ -89,12 +82,8 @@ session_start();
         </div>
     </div>
 
-
-
-
     <div class="col-md-12"><br><br></div>
-    <!-- Footer -->
-        <footer class="footer">
+    <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -110,7 +99,6 @@ session_start();
         </div>
     </footer>
 
-    <!-- Подключение Bootstrap JavaScript (если необходимо) -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
