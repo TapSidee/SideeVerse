@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 14 2024 г., 20:05
+-- Время создания: Май 15 2024 г., 13:11
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.0.22
 
@@ -269,6 +269,39 @@ INSERT INTO `Users` (`id_user`, `first_name`, `last_name`, `username`, `email`, 
 (5506, 'Николай', 'Дроздов', 'syigetsu', 'syigetsu@gmail.com', '6c30b25863d26833d08c615837176d56', 'admin', 'default.jpg'),
 (11214, 'Максим', 'Осинцев', 'HIBAKO', 'hiboba@mail.ru', '5e36941b3d856737e81516acd45edc50', 'admin', 'default.jpg');
 
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `user_book_status`
+--
+
+CREATE TABLE `user_book_status` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `book_id` int NOT NULL,
+  `status` enum('не прочитано','в планах','читаю','прочитано') COLLATE utf8mb4_unicode_ci DEFAULT 'не прочитано'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `user_book_status`
+--
+
+INSERT INTO `user_book_status` (`id`, `user_id`, `book_id`, `status`) VALUES
+(1, 5505, 1, 'в планах'),
+(2, 5505, 2, 'в планах'),
+(3, 5505, 3, 'в планах'),
+(4, 5505, 4, 'прочитано'),
+(5, 5505, 5, 'читаю'),
+(6, 5505, 11, 'в планах'),
+(7, 5505, 12, 'в планах'),
+(8, 5505, 13, 'в планах'),
+(9, 5505, 14, 'прочитано'),
+(10, 5505, 9, 'прочитано'),
+(11, 5505, 10, 'прочитано'),
+(12, 5505, 30, 'прочитано'),
+(13, 5505, 28, 'читаю'),
+(14, 5505, 27, 'читаю');
+
 --
 -- Индексы сохранённых таблиц
 --
@@ -320,6 +353,14 @@ ALTER TABLE `Users`
   ADD PRIMARY KEY (`id_user`);
 
 --
+-- Индексы таблицы `user_book_status`
+--
+ALTER TABLE `user_book_status`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `book_id` (`book_id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -366,6 +407,12 @@ ALTER TABLE `Users`
   MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11215;
 
 --
+-- AUTO_INCREMENT для таблицы `user_book_status`
+--
+ALTER TABLE `user_book_status`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- Ограничения внешнего ключа сохраненных таблиц
 --
 
@@ -377,6 +424,13 @@ ALTER TABLE `Books`
   ADD CONSTRAINT `books_ibfk_2` FOREIGN KEY (`publisher_id`) REFERENCES `Publishers` (`publisher_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `books_ibfk_3` FOREIGN KEY (`genre_id`) REFERENCES `Genres` (`genre_id`),
   ADD CONSTRAINT `books_ibfk_4` FOREIGN KEY (`country_id`) REFERENCES `Country` (`country_id`);
+
+--
+-- Ограничения внешнего ключа таблицы `user_book_status`
+--
+ALTER TABLE `user_book_status`
+  ADD CONSTRAINT `user_book_status_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id_user`),
+  ADD CONSTRAINT `user_book_status_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `books` (`book_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

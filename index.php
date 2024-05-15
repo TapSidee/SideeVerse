@@ -42,9 +42,7 @@ session_start();
                             <a href="administration.php" class="btn btn-primary">Administration</a>
                             <a href="logout.php" class="btn btn-primary">Logout</a>
                         <?php endif; ?>
-                        <?php if (isset($_SESSION['user_id'])): ?>
 
-                        <?php endif; ?>
                     <?php else: ?>
                         <a href="login.php" class="btn btn-primary">Authorization</a>
                     <?php endif; ?>
