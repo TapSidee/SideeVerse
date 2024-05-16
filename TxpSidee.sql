@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 15 2024 г., 13:11
+-- Время создания: Май 16 2024 г., 14:27
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.0.22
 
@@ -171,7 +171,8 @@ CREATE TABLE `Feedback` (
 INSERT INTO `Feedback` (`id`, `sender_name`, `sender_email`, `subject`, `message_text`, `submission_datetime`) VALUES
 (3, 'Klim', 'erwe@mail.ru', 'Похвала от японских самураев', 'много поздравлений должно быть тут\r\n', '2024-05-14 18:35:15'),
 (4, 'Deko', 'dddfg@gmail.com', 'Совет по улучшению', 'много текста с предложениями улучшения проекта', '2024-05-14 18:53:33'),
-(5, 'Liam', 'lr@mia.ru', 'Совет по дизайну', 'много мнений о дизайне проекта', '2024-05-14 18:57:18');
+(5, 'Liam', 'lr@mia.ru', 'Совет по дизайну', 'много мнений о дизайне проекта', '2024-05-14 18:57:18'),
+(6, '000', '000@gmail.com', '000', '00000000000000000000000', '2024-05-15 14:11:55');
 
 -- --------------------------------------------------------
 
@@ -267,7 +268,9 @@ INSERT INTO `Users` (`id_user`, `first_name`, `last_name`, `username`, `email`, 
 (5504, 'Алексей', 'Сульянов', 'sln_tpsd', 'sln_tpsd@gmail.com', '5ca179c31c2ef92572d636db4770de0d', 'admin', 'default.jpg'),
 (5505, 'Тимур', 'Волков', 'lovv66', 'lovv66@gmail.com', '3295c76acbf4caaed33c36b1b5fc2cb1', 'user', 'anim3422.jpg'),
 (5506, 'Николай', 'Дроздов', 'syigetsu', 'syigetsu@gmail.com', '6c30b25863d26833d08c615837176d56', 'admin', 'default.jpg'),
-(11214, 'Максим', 'Осинцев', 'HIBAKO', 'hiboba@mail.ru', '5e36941b3d856737e81516acd45edc50', 'admin', 'default.jpg');
+(11214, 'Максим', 'Осинцев', 'HIBAKO', 'hiboba@mail.ru', '5e36941b3d856737e81516acd45edc50', 'admin', 'default.jpg'),
+(11215, '22', '22', '22', '22@gmai.com', 'b6d767d2f8ed5d21a44b0e5886680cb9', 'user', 'anim3422.jpg'),
+(11216, '000', '000', '000', '000@gmail.com', 'c6f057b86584942e415435ffb1fa93d4', 'user', 'anim21312.jpg');
 
 -- --------------------------------------------------------
 
@@ -300,7 +303,13 @@ INSERT INTO `user_book_status` (`id`, `user_id`, `book_id`, `status`) VALUES
 (11, 5505, 10, 'прочитано'),
 (12, 5505, 30, 'прочитано'),
 (13, 5505, 28, 'читаю'),
-(14, 5505, 27, 'читаю');
+(14, 5505, 27, 'читаю'),
+(15, 11215, 1, 'в планах'),
+(16, 11215, 3, 'читаю'),
+(17, 11215, 4, 'читаю'),
+(18, 11216, 1, 'в планах'),
+(19, 11216, 2, 'в планах'),
+(20, 11216, 3, 'читаю');
 
 --
 -- Индексы сохранённых таблиц
@@ -386,7 +395,7 @@ ALTER TABLE `Country`
 -- AUTO_INCREMENT для таблицы `Feedback`
 --
 ALTER TABLE `Feedback`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `Genres`
@@ -404,13 +413,13 @@ ALTER TABLE `Publishers`
 -- AUTO_INCREMENT для таблицы `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11215;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11217;
 
 --
 -- AUTO_INCREMENT для таблицы `user_book_status`
 --
 ALTER TABLE `user_book_status`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
