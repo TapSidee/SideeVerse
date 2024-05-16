@@ -8,7 +8,6 @@ if ($connection == false) {
     exit();
 }
 
-// Проверка авторизации пользователя
 if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
     die('Пожалуйста, авторизуйтесь.');
 }
@@ -16,41 +15,34 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
 $userId = $_SESSION['user_id'];
 $bookId = isset($_GET['book_id']) ? intval($_GET['book_id']) : 0;
 
-// Выполнение SQL-запроса для получения данных о книге
 $query = "SELECT * FROM books WHERE book_id = $bookId";
 $result = mysqli_query($connection, $query);
 
 if ($result && mysqli_num_rows($result) > 0) {
     $bookData = mysqli_fetch_assoc($result);
 
-    // Получение данных об авторе
     $authorId = $bookData['author_id'];
     $authorQuery = "SELECT first_name, last_name FROM authors WHERE author_id = $authorId";
     $authorResult = mysqli_query($connection, $authorQuery);
     $authorData = $authorResult ? mysqli_fetch_assoc($authorResult) : null;
 
-    // Получение данных об издательстве
     $publisherId = $bookData['publisher_id'];
     $publisherQuery = "SELECT name FROM Publishers WHERE publisher_id = $publisherId";
     $publisherResult = mysqli_query($connection, $publisherQuery);
     $publisherData = $publisherResult ? mysqli_fetch_assoc($publisherResult) : null;
 
-    // Получение данных о жанре
     $genreId = $bookData['genre_id'];
     $genreQuery = "SELECT genre_name FROM Genres WHERE genre_id = $genreId";
     $genreResult = mysqli_query($connection, $genreQuery);
     $genreData = $genreResult ? mysqli_fetch_assoc($genreResult) : null;
 
-    // Получение данных о стране
     $countryId = $bookData['country_id'];
     $countryQuery = "SELECT country_name FROM country WHERE country_id = $countryId";
     $countryResult = mysqli_query($connection, $countryQuery);
     $countryData = $countryResult ? mysqli_fetch_assoc($countryResult) : null;
 
-    // Извлечение года из publication_date
     $publicationYear = date('Y', strtotime($bookData['publication_date']));
 
-    // Получение статуса прочтения книги
     $statusQuery = "SELECT status FROM user_book_status WHERE user_id = $userId AND book_id = $bookId";
     $statusResult = mysqli_query($connection, $statusQuery);
     $statusData = $statusResult ? mysqli_fetch_assoc($statusResult) : null;
@@ -73,6 +65,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: book-details.php?book_id=$bookId");
     exit();
 }
+
+// Получение похожих книг
+$similarBooks = [];
+$similarQueries = [
+    "SELECT * FROM books WHERE author_id = $authorId AND book_id != $bookId ORDER BY RAND() LIMIT 1",
+    "SELECT * FROM books WHERE country_id = $countryId AND book_id != $bookId ORDER BY RAND() LIMIT 1",
+    "SELECT * FROM books WHERE genre_id = $genreId AND book_id != $bookId ORDER BY RAND() LIMIT 1"
+];
+
+foreach ($similarQueries as $query) {
+    $similarResult = mysqli_query($connection, $query);
+    if ($similarResult && mysqli_num_rows($similarResult) > 0) {
+        $similarBooks[] = mysqli_fetch_assoc($similarResult);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -83,6 +90,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>LibrarySidee</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .card-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            aspect-ratio: 2 / 3;
+        }
+        .book-details {
+            font-size: 18px;
+        }
+        .book-details h2, .book-details h6, .book-details p {
+            font-size: 20px;
+        }
+        .book-details h2 {
+            font-size: 26px;
+        }
+        .action-buttons {
+            margin-bottom: 20px;
+        }
+        .action-buttons .btn {
+            margin-right: 10px;
+        }
+        .similar-books {
+            margin-top: 40px;
+        }
+        .similar-books h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .similar-books .card {
+            margin-right: 10px;
+            flex: 1;
+            max-width: 18rem;
+        }
+        .similar-books .card-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            aspect-ratio: 2 / 3;
+        }
+        .similar-books .card-title {
+            font-size: 16px;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -94,17 +147,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-md-4 mt-2">
                 <h1><img src="assets/images/logo.png" alt="logo" class="logo"> LibrarySidee - Student library</h1>
             </div>
-            <div class="col-md-4 mt-2">
-            </div>
+            <div class="col-md-4 mt-2"></div>
         </div>
     </div>
 </header>
 
-<!-- Контент страницы -->
-<div class="container">
+<div class="container book-details">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <img class="card-image" src="assets/images/<?php echo $bookData['image']; ?>" alt="Изображение книги">
+            <div class="action-buttons"><br>
+                <a href="read.php?title=<?php echo urlencode($bookData['title']); ?>" class="btn btn-secondary">Читать</a>
+                <a href="assets/files/nan.pdf" class="btn btn-secondary" download>Скачать</a>
+            </div>
             <form method="POST" action="">
                 <label for="status">Статус прочтения:</label>
                 <select name="status" id="status" class="form-control" style="width:100%;">
@@ -116,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="btn btn-primary mt-2">Сохранить</button>
             </form>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <h2><?php echo $bookData['title']; ?></h2>
             <h6 class="book-subtitle mb-2 text-muted">Автор: <?php echo $authorData['first_name'] . ' ' . $authorData['last_name']; ?></h6>
             <h6 class="book-subtitle mb-2 text-muted">Издательство: <?php echo $publisherData['name']; ?></h6>
@@ -127,8 +182,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p><?php echo $bookData['text']; ?></p>
         </div>
     </div>
+    <div class="row similar-books">
+    <div class="col-md-12">
+        <h3>Похожие книги</h3>
+        <div class="d-flex">
+            <?php foreach ($similarBooks as $similarBook): ?>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-img">
+                        <img src="assets/images/<?php echo $similarBook['image']; ?>" class="card-img-top" alt="<?php echo $similarBook['title']; ?>">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $similarBook['title']; ?></h5>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
 </div>
-
+<br>
 <div class="col-md-12"><br><br></div>
 <!-- Footer -->
 <footer class="footer">

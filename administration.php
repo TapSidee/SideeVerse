@@ -118,10 +118,10 @@ if($connection == false)
                     <button type="submit">Добавить страну</button>
                 </form><br><br><br><br><br><br><br>
 
-                <h2>Форма ввода данных о странах</h2>
+                <h2>Форма ввода данных о жанрах</h2>
                 <form action="includes/process_genre_data.php" method="post">
                                 <div class="form-group">
-                                    <label for="genre_name">Наименование страны:</label>
+                                    <label for="genre_name">Наименование жанра:</label>
                                     <input type="text" id="genre_name" name="genre_name" required>
                                 </div>
                     <button type="submit">Добавить жанр</button>

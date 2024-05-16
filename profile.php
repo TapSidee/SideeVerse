@@ -55,7 +55,6 @@ foreach ($statuses as $status) {
 
         .profile-info, .reading-stats {
             padding: 20px;
-            margin-bottom: 20px;
             background-color: #fff;
         }
 
@@ -63,14 +62,16 @@ foreach ($statuses as $status) {
             flex: 0 0 65%;
             max-width: 65%;
             display: flex;
-            border: 1px solid #dee2e6;
+            /* border: 1px solid #dee2e6; */
             border-radius: 0.25rem;
             align-items: flex-start;
+            margin-bottom: 0px; /* Добавлено смещение нижней границы */
         }
 
         .reading-stats {
             flex: 0 0 30%;
             max-width: 30%;
+            margin-bottom: 0px; /* Добавлено смещение нижней границы */
         }
 
         .profile-info .avatar {
@@ -105,6 +106,11 @@ foreach ($statuses as $status) {
         .card-body ul li:not(:last-child) {
             border-bottom: 1px solid #dee2e6;
         }
+
+        .card-body {
+            max-height: 300px; /* Увеличиваем высоту для отображения большего количества книг */
+            overflow-y: auto; /* Добавляем прокрутку, если контент превышает максимальную высоту */
+        }
     </style>
 </head>
 <body>
@@ -136,7 +142,7 @@ foreach ($statuses as $status) {
                 </div>
             </div>
             <div class="reading-stats">
-                <h3>Статистика чтения книг</h3>
+                <!-- <h3>Статистика чтения книг</h3> -->
                 <?php foreach ($statuses as $status): ?>
                     <div class="card mb-3">
                         <div class="card-header">
