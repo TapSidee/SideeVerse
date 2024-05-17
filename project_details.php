@@ -1,12 +1,13 @@
 <?php
-$connection = mysqli_connect('127.0.0.1', 'root', '', 'TxpSidee');
+    // Подключение к базе данных
+    $connection = mysqli_connect('127.0.0.1', 'root', '', 'TxpSidee');
 
-if($connection == false)
-{
-    echo 'Не удалось подключиться к базе данных TxpSidee 0_0 <br>';
-    echo mysqli_connect_error();
-    exit();
-}
+    // Проверка соединения
+    if($connection == false) {
+        echo 'Не удалось подключиться к базе данных TxpSidee 0_0 <br>';
+        echo mysqli_connect_error();
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,30 +20,20 @@ if($connection == false)
 </head>
 
 <body>
-
     <header>
         <div class="header">
             <div class="row">
                 <div class="col-md-3 mt-2">
                     <a href="index.php" class="back-button">На главную</a>
                 </div>
-                <!-- <div class="col-md-1">
-                    <div class="logo-container">
-                        <img src="assets/images/logo.jpg" alt="logo" class="logo">
-                    </div>
-                </div> -->
                 <div class="col-md-5 mt-2">
-                <h1><img src="assets/images/logo.png" alt="logo" class="logo">   LibrarySidee - Student library</h1>
+                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> LibrarySidee - Student library</h1>
                 </div>
                 <div class="col-md-4 mt-2">
-                    <!-- <a href="administration.php" class="btn btn-primary">Administration</a>
-                    <a href="login.php" class="btn btn-primary">Authorization</a> -->
                 </div>
             </div>
         </div>
     </header>
-
-
 
     <!-- Контент страницы -->
     <div class="container">
@@ -51,7 +42,6 @@ if($connection == false)
                 <img class="qq-image img-fluid" src="assets/images/logo-v2.jpg" alt="logo-2">
             </div>
             <div class="col-md-8">
-                    
                     <h5>Сведения о проекте</h5>
 
                     <p>Добро пожаловать на страницу "Сведения о проекте"! 
@@ -99,14 +89,13 @@ if($connection == false)
                     Повышение уровня безопасности и надежности сайта</p>
 
                     <h6>Спасибо за то, что вы с нами! Мы надеемся, что наш проект будет полезен для вас и поможет вам в учебе и саморазвитии.</h6>
-
-            </div>
+                    </div>
         </div>
     </div>
 
     <div class="col-md-12"><br><br></div>
     <!-- Footer -->
-        <footer class="footer">
+    <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">

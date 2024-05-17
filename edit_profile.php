@@ -1,64 +1,68 @@
 <?php
-session_start();
-$connection = mysqli_connect('127.0.0.1', 'root', '', 'TxpSidee');
+    // Начало сессии
+    session_start();
 
-if ($connection === false) {
-    echo 'Не удалось подключиться к базе данных: ' . mysqli_connect_error();
-    exit();
-}
+    // Подключение к базе данных
+    $connection = mysqli_connect('127.0.0.1', 'root', '', 'TxpSidee');
 
-// Проверка отправки формы
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
-    $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
-    $username = mysqli_real_escape_string($connection, $_POST['username']);
-    $email = mysqli_real_escape_string($connection, $_POST['email']);
-    $password = !empty($_POST['password']) ? md5($_POST['password']) : null;
+    // Проверка соединения
+    if ($connection === false) {
+        echo 'Не удалось подключиться к базе данных: ' . mysqli_connect_error();
+        exit();
+    }
 
-    // Обработка загрузки файла аватара
-    if (!empty($_FILES['avatar']['name'])) {
-        $avatar = $_FILES['avatar']['name'];
-        $avatar_tmp_name = $_FILES['avatar']['tmp_name'];
-        $avatar_folder = 'uploads/avatars/';
+    // Проверка отправки формы
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Защита от SQL-инъекций
+        $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
+        $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
+        $username = mysqli_real_escape_string($connection, $_POST['username']);
+        $email = mysqli_real_escape_string($connection, $_POST['email']);
+        $password = !empty($_POST['password']) ? md5($_POST['password']) : null;
 
-        if (move_uploaded_file($avatar_tmp_name, $avatar_folder . $avatar)) {
-            $avatar = mysqli_real_escape_string($connection, $avatar); // Защита от SQL инъекций для имени файла
+        // Обработка загрузки файла аватара
+        if (!empty($_FILES['avatar']['name'])) {
+            $avatar = $_FILES['avatar']['name'];
+            $avatar_tmp_name = $_FILES['avatar']['tmp_name'];
+            $avatar_folder = 'uploads/avatars/';
+
+            if (move_uploaded_file($avatar_tmp_name, $avatar_folder . $avatar)) {
+                $avatar = mysqli_real_escape_string($connection, $avatar); // Защита от SQL инъекций для имени файла
+            } else {
+                echo '<div class="alert alert-danger text-center">Ошибка загрузки файла.</div>';
+                $avatar = $_SESSION['avatar']; // Используем старый аватар, если загрузка не удалась
+            }
         } else {
-            echo '<div class="alert alert-danger text-center">Ошибка загрузки файла.</div>';
-            $avatar = $_SESSION['avatar']; // Используем старый аватар, если загрузка не удалась
+            $avatar = $_SESSION['avatar']; // Нет нового файла, используем старый
         }
-    } else {
-        $avatar = $_SESSION['avatar']; // Нет нового файла, используем старый
+
+        // Формирование запроса на обновление данных пользователя
+        $update_query = "UPDATE users SET first_name = '$first_name', last_name = '$last_name', username = '$username', email = '$email', avatar = '$avatar'";
+        if ($password) {
+            $update_query .= ", password = '$password'";
+        }
+        $update_query .= " WHERE id_user = " . $_SESSION['user_id'];
+        $result = mysqli_query($connection, $update_query);
+
+        if ($result) {
+            // Обновление сессии
+            $_SESSION['first_name'] = $first_name;
+            $_SESSION['last_name'] = $last_name;
+            $_SESSION['username'] = $username;
+            $_SESSION['email'] = $email;
+            $_SESSION['avatar'] = $avatar; // Сохраняем имя файла
+
+            echo '<div class="alert alert-success text-center">Данные успешно обновлены.</div>';
+        } else {
+            echo '<div class="alert alert-danger text-center">Ошибка обновления данных: ' . mysqli_error($connection) . '</div>';
+        }
     }
 
-    // Формирование запроса на обновление данных пользователя
-    $update_query = "UPDATE users SET first_name = '$first_name', last_name = '$last_name', username = '$username', email = '$email', avatar = '$avatar'";
-    if ($password) {
-        $update_query .= ", password = '$password'";
-    }
-    $update_query .= " WHERE id_user = " . $_SESSION['user_id'];
-    $result = mysqli_query($connection, $update_query);
-
-    if ($result) {
-        // Обновление сессии
-        $_SESSION['first_name'] = $first_name;
-        $_SESSION['last_name'] = $last_name;
-        $_SESSION['username'] = $username;
-        $_SESSION['email'] = $email;
-        $_SESSION['avatar'] = $avatar; // Сохраняем имя файла
-
-        echo '<div class="alert alert-success text-center">Данные успешно обновлены.</div>';
-    } else {
-        echo '<div class="alert alert-danger text-center">Ошибка обновления данных: ' . mysqli_error($connection) . '</div>';
-    }
-}
-
-// Получение текущих данных пользователя для формы
-$query = "SELECT first_name, last_name, username, email, avatar FROM users WHERE id_user = ".$_SESSION['user_id'];
-$userData = mysqli_query($connection, $query);
-$user = mysqli_fetch_assoc($userData);
+    // Получение текущих данных пользователя для формы
+    $query = "SELECT first_name, last_name, username, email, avatar FROM users WHERE id_user = " . $_SESSION['user_id'];
+    $userData = mysqli_query($connection, $query);
+    $user = mysqli_fetch_assoc($userData);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -87,6 +91,7 @@ $user = mysqli_fetch_assoc($userData);
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h2 class="text-center">Редактировать профиль</h2>
+                <!-- Форма редактирования профиля -->
                 <form action="edit_profile.php" method="post" enctype="multipart/form-data" class="mb-3">
                     <div class="form-group">
                         Имя: <input type="text" name="first_name" value="<?php echo $user['first_name']; ?>" class="form-control">

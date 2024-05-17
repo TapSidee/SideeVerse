@@ -1,13 +1,17 @@
 <?php
-session_start();
-$connection = mysqli_connect('127.0.0.1', 'root', '', 'TxpSidee');
+    // Начало сессии
+    session_start();
 
-if($connection == false)
-{
-    echo 'Не удалось подключиться к базе данных TxpSidee 0_0 <br>';
-    echo mysqli_connect_error();
-    exit();
-}?>
+    // Подключение к базе данных
+    $connection = mysqli_connect('127.0.0.1', 'root', '', 'TxpSidee');
+
+    // Проверка соединения
+    if ($connection == false) {
+        echo 'Не удалось подключиться к базе данных TxpSidee 0_0 <br>';
+        echo mysqli_connect_error();
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,116 +23,119 @@ if($connection == false)
 </head>
 
 <body>
-
     <header>
         <div class="header">
             <div class="row">
                 <div class="col-md-4 mt-2">
+                    <!-- Кнопка для возврата на главную страницу -->
                     <a href="index.php" class="back-button">На главную</a>
                 </div>
                 <div class="col-md-4 mt-2">
-                    <h1><img src="assets/images/logo.png" alt="logo" class="logo">   LibrarySidee - Student library</h1>
+                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> LibrarySidee - Student library</h1>
                 </div>
                 <div class="col-md-4 mt-2">
-                    <!-- <a href="login.php" class="btn btn-primary">Authorization</a> -->
                 </div>
             </div>
         </div>
     </header>
 
-
-
     <div class="login-container">
         <div class="row">
             <div class="col-md-4">
                 <h2>Форма ввода данных о книгах</h2>
+                <!-- Форма для добавления книги -->
                 <form action="includes/process_book_data.php" method="post">
-                                <div class="form-group">
-                                    <label for="titie">Название книги:</label>
-                                    <input type="text" id="title" name="title" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="text">Описание:</label>
-                                    <input type="text" id="text" name="text" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="image">Изображение:</label>
-                                    <input type="text" id="image" name="image" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="author_id">ID автора:</label>
-                                    <input type="number" id="author_id" name="author_id" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="genre_id">ID жанра:</label>
-                                    <input type="number" id="genre_id" name="genre_id" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="country_id">ID страны:</label>
-                                    <input type="number" id="country_id" name="country_id" required >
-                                </div>
-                                <div class="form-group">
-                                    <label for="publication_date">Год выпуска:</label>
-                                    <input type="text" id="publication_date" name="publication_date" required title="Год выпуска в формате ГГГГ-ММ-ДД">
-                                </div>
-                                <div class="form-group">
-                                    <label for="quantity">Количество книг:</label>
-                                    <input type="number" id="quantity" name="quantity" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="publisher_id">ID издательства:</label>
-                                    <input type="number" id="publisher_id" name="publisher_id" required>
-                                </div>
+                    <div class="form-group">
+                        <label for="title">Название книги:</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="text">Описание:</label>
+                        <input type="text" id="text" name="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Изображение:</label>
+                        <input type="text" id="image" name="image" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="author_id">ID автора:</label>
+                        <input type="number" id="author_id" name="author_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="genre_id">ID жанра:</label>
+                        <input type="number" id="genre_id" name="genre_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country_id">ID страны:</label>
+                        <input type="number" id="country_id" name="country_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="publication_date">Год выпуска:</label>
+                        <input type="text" id="publication_date" name="publication_date" required title="Год выпуска в формате ГГГГ-ММ-ДД">
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Количество книг:</label>
+                        <input type="number" id="quantity" name="quantity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="publisher_id">ID издательства:</label>
+                        <input type="number" id="publisher_id" name="publisher_id" required>
+                    </div>
                     <button type="submit">Добавить книгу</button>
-                </form><br><br><br><br><br><br><br>
+                </form>
+                <br><br><br><br><br><br><br>
 
                 <h2>Форма ввода данных об авторах</h2>
+                <!-- Форма для добавления автора -->
                 <form action="includes/process_author_data.php" method="post">
-                                <div class="form-group">
-                                    <label for="first_name">Имя автора:</label>
-                                    <input type="text" id="first_name" name="first_name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="last_name">Фамилия автора:</label>
-                                    <input type="text" id="last_name" name="last_name" required>
-                                </div>
+                    <div class="form-group">
+                        <label for="first_name">Имя автора:</label>
+                        <input type="text" id="first_name" name="first_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Фамилия автора:</label>
+                        <input type="text" id="last_name" name="last_name" required>
+                    </div>
                     <button type="submit">Добавить автора</button>
-                </form><br><br><br><br><br><br><br>
-
+                </form>
+                <br><br><br><br><br><br><br>
 
                 <h2>Форма ввода данных об издательствах</h2>
+                <!-- Форма для добавления издательства -->
                 <form action="includes/process_publisher_data.php" method="post">
-                                <div class="form-group">
-                                    <label for="name">Название издательства:</label>
-                                    <input type="text" id="name" name="name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="address">Фактический адрес издательства:</label>
-                                    <input type="text" id="address" name="address" required>
-                                </div>
+                    <div class="form-group">
+                        <label for="name">Название издательства:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Фактический адрес издательства:</label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
                     <button type="submit">Добавить издательство</button>
-                </form><br><br><br><br><br><br><br>
+                </form>
+                <br><br><br><br><br><br><br>
 
                 <h2>Форма ввода данных о странах</h2>
+                <!-- Форма для добавления страны -->
                 <form action="includes/process_country_data.php" method="post">
-                                <div class="form-group">
-                                    <label for="country_name">Наименование страны:</label>
-                                    <input type="text" id="country_name" name="country_name" required>
-                                </div>
+                    <div class="form-group">
+                        <label for="country_name">Наименование страны:</label>
+                        <input type="text" id="country_name" name="country_name" required>
+                    </div>
                     <button type="submit">Добавить страну</button>
-                </form><br><br><br><br><br><br><br>
+                </form>
+                <br><br><br><br><br><br><br>
 
                 <h2>Форма ввода данных о жанрах</h2>
+                <!-- Форма для добавления жанра -->
                 <form action="includes/process_genre_data.php" method="post">
-                                <div class="form-group">
-                                    <label for="genre_name">Наименование жанра:</label>
-                                    <input type="text" id="genre_name" name="genre_name" required>
-                                </div>
+                    <div class="form-group">
+                        <label for="genre_name">Наименование жанра:</label>
+                        <input type="text" id="genre_name" name="genre_name" required>
+                    </div>
                     <button type="submit">Добавить жанр</button>
                 </form>
             </div>
-
-
 
             <div class="col-md-8">
                 <!-- Таблицы для отображения данных -->
@@ -145,33 +152,33 @@ if($connection == false)
                                 <th>ID жанра</th>
                                 <th>ID страны</th>
                                 <th>Дата публикации</th>
-                                <th>Количество</th>
                                 <th>ID издательства</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $query1 = "SELECT * FROM books";
-                            $t1 = mysqli_query($connection, $query1);
+                                // Запрос данных о книгах
+                                $query1 = "SELECT * FROM books";
+                                $t1 = mysqli_query($connection, $query1);
 
-                            if (!$t1) {
-                                die("Ошибка запроса: " . mysqli_error($connection));
-                            }
+                                if (!$t1) {
+                                    die("Ошибка запроса: " . mysqli_error($connection));
+                                }
 
-                            while ($row1 = mysqli_fetch_assoc($t1)) {
-                                echo "<tr>";
-                                echo "<td>" . $row1['book_id'] . "</td>";
-                                echo "<td>" . $row1['title'] . "</td>";
-                                echo "<td>" . 'Описание' . "</td>";
-                                echo "<td>" . $row1['image'] . "</td>";
-                                echo "<td>" . $row1['author_id'] . "</td>";
-                                echo "<td>" . $row1['genre_id'] . "</td>";
-                                echo "<td>" . $row1['country_id'] . "</td>";
-                                echo "<td>" . $row1['publication_date'] . "</td>";
-                                echo "<td>" . $row1['quantity'] . "</td>";
-                                echo "<td>" . $row1['publisher_id'] . "</td>";
-                                echo "</tr>";
-                            }
+                                // Вывод данных о книгах
+                                while ($row1 = mysqli_fetch_assoc($t1)) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row1['book_id'] . "</td>";
+                                    echo "<td>" . $row1['title'] . "</td>";
+                                    echo "<td>" . substr($row1['text'], 0, 50) . "..." . "</td>";
+                                    echo "<td>" . $row1['image'] . "</td>";
+                                    echo "<td>" . $row1['author_id'] . "</td>";
+                                    echo "<td>" . $row1['genre_id'] . "</td>";
+                                    echo "<td>" . $row1['country_id'] . "</td>";
+                                    echo "<td>" . $row1['publication_date'] . "</td>";
+                                    echo "<td>" . $row1['publisher_id'] . "</td>";
+                                    echo "</tr>";
+                                }
                             ?>
                         </tbody>
                     </table>
@@ -190,20 +197,22 @@ if($connection == false)
                         </thead>
                         <tbody>
                             <?php
-                            $query2 = "SELECT * FROM authors";
-                            $t2 = mysqli_query($connection, $query2);
+                                // Запрос данных об авторах
+                                $query2 = "SELECT * FROM authors";
+                                $t2 = mysqli_query($connection, $query2);
 
-                            if (!$t2) {
-                                die("Ошибка запроса: " . mysqli_error($connection));
-                            }
+                                if (!$t2) {
+                                    die("Ошибка запроса: " . mysqli_error($connection));
+                                }
 
-                            while ($row2 = mysqli_fetch_assoc($t2)) {
-                                echo "<tr>";
-                                echo "<td>" . $row2['author_id'] . "</td>";
-                                echo "<td>" . $row2['first_name'] . "</td>";
-                                echo "<td>" . $row2['last_name'] . "</td>";
-                                echo "</tr>";
-                            }
+                                // Вывод данных об авторах// Вывод данных об авторах
+                                while ($row2 = mysqli_fetch_assoc($t2)) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row2['author_id'] . "</td>";
+                                    echo "<td>" . $row2['first_name'] . "</td>";
+                                    echo "<td>" . $row2['last_name'] . "</td>";
+                                    echo "</tr>";
+                                }
                             ?>
                         </tbody>
                     </table>
@@ -222,20 +231,22 @@ if($connection == false)
                         </thead>
                         <tbody>
                             <?php
-                            $query3 = "SELECT * FROM publishers";
-                            $t3 = mysqli_query($connection, $query3);
+                                // Запрос данных об издательствах
+                                $query3 = "SELECT * FROM publishers";
+                                $t3 = mysqli_query($connection, $query3);
 
-                            if (!$t3) {
-                                die("Ошибка запроса: " . mysqli_error($connection));
-                            }
+                                if (!$t3) {
+                                    die("Ошибка запроса: " . mysqli_error($connection));
+                                }
 
-                            while ($row3 = mysqli_fetch_assoc($t3)) {
-                                echo "<tr>";
-                                echo "<td>" . $row3['publisher_id'] . "</td>";
-                                echo "<td>" . $row3['name'] . "</td>";
-                                echo "<td>" . $row3['address'] . "</td>";
-                                echo "</tr>";
-                            }
+                                // Вывод данных об издательствах
+                                while ($row3 = mysqli_fetch_assoc($t3)) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row3['publisher_id'] . "</td>";
+                                    echo "<td>" . $row3['name'] . "</td>";
+                                    echo "<td>" . $row3['address'] . "</td>";
+                                    echo "</tr>";
+                                }
                             ?>
                         </tbody>
                     </table>
@@ -253,19 +264,21 @@ if($connection == false)
                         </thead>
                         <tbody>
                             <?php
-                            $query4 = "SELECT * FROM country";
-                            $t4 = mysqli_query($connection, $query4);
+                                // Запрос данных о странах
+                                $query4 = "SELECT * FROM country";
+                                $t4 = mysqli_query($connection, $query4);
 
-                            if (!$t4) {
-                                die("Ошибка запроса: " . mysqli_error($connection));
-                            }
+                                if (!$t4) {
+                                    die("Ошибка запроса: " . mysqli_error($connection));
+                                }
 
-                            while ($row4 = mysqli_fetch_assoc($t4)) {
-                                echo "<tr>";
-                                echo "<td>" . $row4['country_id'] . "</td>";
-                                echo "<td>" . $row4['country_name'] . "</td>";
-                                echo "</tr>";
-                            }
+                                // Вывод данных о странах
+                                while ($row4 = mysqli_fetch_assoc($t4)) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row4['country_id'] . "</td>";
+                                    echo "<td>" . $row4['country_name'] . "</td>";
+                                    echo "</tr>";
+                                }
                             ?>
                         </tbody>
                     </table>
@@ -283,6 +296,7 @@ if($connection == false)
                         </thead>
                         <tbody>
                             <?php
+                            // Запрос данных о жанрах
                             $query5 = "SELECT * FROM genres";
                             $t5 = mysqli_query($connection, $query5);
 
@@ -290,6 +304,7 @@ if($connection == false)
                                 die("Ошибка запроса: " . mysqli_error($connection));
                             }
 
+                            // Вывод данных о жанрах
                             while ($row5 = mysqli_fetch_assoc($t5)) {
                                 echo "<tr>";
                                 echo "<td>" . $row5['genre_id'] . "</td>";
@@ -301,17 +316,12 @@ if($connection == false)
                     </table>
                 </div>
             </div>
-
-            <!-- <div class="col-md-6"> -->
-
-            </div>
         </div>
     </div>
 
-
     <div class="col-md-12"><br><br></div>
     <!-- Footer -->
-        <footer class="footer">
+    <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -326,8 +336,8 @@ if($connection == false)
             </div>
         </div>
     </footer>
-    
-        <!-- Подключение Bootstrap JavaScript (если необходимо) -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </body>
-    </html>
+
+    <!-- Подключение Bootstrap JavaScript (если необходимо) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,42 +1,52 @@
 <?php
-session_start();
-$connection = mysqli_connect('127.0.0.1', 'root', '', 'TxpSidee');
+    // Начало сессии
+    session_start();
 
-if ($connection == false) {
-    echo 'Не удалось подключиться к базе данных TxpSidee 0_0 <br>';
-    echo mysqli_connect_error();
-    exit();
-}
+    // Подключение к базе данных
+    $connection = mysqli_connect('127.0.0.1', 'root', '', 'TxpSidee');
 
-if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
-    die('Пожалуйста, авторизуйтесь.');
-}
-
-$userId = $_SESSION['user_id'];
-
-$userQuery = "SELECT * FROM users WHERE id_user = $userId";
-$userResult = mysqli_query($connection, $userQuery);
-
-if ($userResult && mysqli_num_rows($userResult) > 0) {
-    $userData = mysqli_fetch_assoc($userResult);
-} else {
-    die('Пользователь не найден.');
-}
-
-$statuses = ['в планах', 'читаю', 'прочитано'];
-$booksByStatus = [];
-
-foreach ($statuses as $status) {
-    $statusQuery = "SELECT books.title FROM user_book_status 
-                    JOIN books ON user_book_status.book_id = books.book_id 
-                    WHERE user_book_status.user_id = $userId AND user_book_status.status = '$status'";
-    $statusResult = mysqli_query($connection, $statusQuery);
-    if ($statusResult) {
-        $booksByStatus[$status] = mysqli_fetch_all($statusResult, MYSQLI_ASSOC);
-    } else {
-        $booksByStatus[$status] = [];
+    // Проверка соединения
+    if ($connection == false) {
+        echo 'Не удалось подключиться к базе данных TxpSidee 0_0 <br>';
+        echo mysqli_connect_error();
+        exit();
     }
-}
+
+    // Проверка авторизации пользователя
+    if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+        die('Пожалуйста, авторизуйтесь.');
+    }
+
+    // Получение ID пользователя из сессии
+    $userId = $_SESSION['user_id'];
+
+    // Запрос данных пользователя
+    $userQuery = "SELECT * FROM users WHERE id_user = $userId";
+    $userResult = mysqli_query($connection, $userQuery);
+
+    // Проверка результата запроса данных пользователя
+    if ($userResult && mysqli_num_rows($userResult) > 0) {
+        $userData = mysqli_fetch_assoc($userResult);
+    } else {
+        die('Пользователь не найден.');
+    }
+
+    // Статусы книг
+    $statuses = ['в планах', 'читаю', 'прочитано'];
+    $booksByStatus = [];
+
+    // Запрос книг по статусам для текущего пользователя
+    foreach ($statuses as $status) {
+        $statusQuery = "SELECT books.title FROM user_book_status 
+                        JOIN books ON user_book_status.book_id = books.book_id 
+                        WHERE user_book_status.user_id = $userId AND user_book_status.status = '$status'";
+        $statusResult = mysqli_query($connection, $statusQuery);
+        if ($statusResult) {
+            $booksByStatus[$status] = mysqli_fetch_all($statusResult, MYSQLI_ASSOC);
+        } else {
+            $booksByStatus[$status] = [];
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -62,16 +72,15 @@ foreach ($statuses as $status) {
             flex: 0 0 65%;
             max-width: 65%;
             display: flex;
-            /* border: 1px solid #dee2e6; */
             border-radius: 0.25rem;
             align-items: flex-start;
-            margin-bottom: 0px; /* Добавлено смещение нижней границы */
+            margin-bottom: 0px;
         }
 
         .reading-stats {
             flex: 0 0 30%;
             max-width: 30%;
-            margin-bottom: 0px; /* Добавлено смещение нижней границы */
+            margin-bottom: 0px;
         }
 
         .profile-info .avatar {
@@ -108,8 +117,8 @@ foreach ($statuses as $status) {
         }
 
         .card-body {
-            max-height: 300px; /* Увеличиваем высоту для отображения большего количества книг */
-            overflow-y: auto; /* Добавляем прокрутку, если контент превышает максимальную высоту */
+            max-height: 300px; 
+            overflow-y: auto;
         }
     </style>
 </head>
@@ -131,6 +140,7 @@ foreach ($statuses as $status) {
         <div class="profile-container">
             <div class="profile-info">
                 <div class="avatar">
+                    <!-- Вывод аватара пользователя -->
                     <img src="uploads/avatars/<?php echo $_SESSION['avatar']; ?>" alt="Avatar">
                 </div>
                 <div class="personal-info">
@@ -142,7 +152,7 @@ foreach ($statuses as $status) {
                 </div>
             </div>
             <div class="reading-stats">
-                <!-- <h3>Статистика чтения книг</h3> -->
+                <!-- Вывод книг по статусам -->
                 <?php foreach ($statuses as $status): ?>
                     <div class="card mb-3">
                         <div class="card-header">
@@ -150,9 +160,11 @@ foreach ($statuses as $status) {
                         </div>
                         <div class="card-body">
                             <ul>
+                                <!-- Проверка наличия книг с текущим статусом -->
                                 <?php if (empty($booksByStatus[$status])): ?>
                                     <li>Нет книг с этим статусом</li>
                                 <?php else: ?>
+                                    <!-- Вывод списка книг с текущим статусом -->
                                     <?php foreach ($booksByStatus[$status] as $book): ?>
                                         <li><?php echo $book['title']; ?></li>
                                     <?php endforeach; ?>

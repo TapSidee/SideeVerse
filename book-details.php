@@ -1,85 +1,99 @@
 <?php
-session_start();
-$connection = mysqli_connect('127.0.0.1', 'root', '', 'TxpSidee');
+    // Начало сессии
+    session_start();
 
-if ($connection == false) {
-    echo 'Не удалось подключиться к базе данных TxpSidee 0_0 <br>';
-    echo mysqli_connect_error();
-    exit();
-}
+    // Подключение к базе данных
+    $connection = mysqli_connect('127.0.0.1', 'root', '', 'TxpSidee');
 
-if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
-    die('Пожалуйста, авторизуйтесь.');
-}
+    // Проверка соединения
+    if ($connection == false) {
+        echo 'Не удалось подключиться к базе данных TxpSidee 0_0 <br>';
+        echo mysqli_connect_error();
+        exit();
+    }
 
-$userId = $_SESSION['user_id'];
-$bookId = isset($_GET['book_id']) ? intval($_GET['book_id']) : 0;
+    // Проверка авторизации пользователя
+    if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+        die('Пожалуйста, авторизуйтесь.');
+    }
 
-$query = "SELECT * FROM books WHERE book_id = $bookId";
-$result = mysqli_query($connection, $query);
+    // Получение ID пользователя и книги из параметра GET
+    $userId = $_SESSION['user_id'];
+    $bookId = isset($_GET['book_id']) ? intval($_GET['book_id']) : 0;
 
-if ($result && mysqli_num_rows($result) > 0) {
-    $bookData = mysqli_fetch_assoc($result);
+    // Запрос данных книги
+    $query = "SELECT * FROM books WHERE book_id = $bookId";
+    $result = mysqli_query($connection, $query);
 
-    $authorId = $bookData['author_id'];
-    $authorQuery = "SELECT first_name, last_name FROM authors WHERE author_id = $authorId";
-    $authorResult = mysqli_query($connection, $authorQuery);
-    $authorData = $authorResult ? mysqli_fetch_assoc($authorResult) : null;
+    // Проверка результата запроса данных книги
+    if ($result && mysqli_num_rows($result) > 0) {
+        $bookData = mysqli_fetch_assoc($result);
 
-    $publisherId = $bookData['publisher_id'];
-    $publisherQuery = "SELECT name FROM Publishers WHERE publisher_id = $publisherId";
-    $publisherResult = mysqli_query($connection, $publisherQuery);
-    $publisherData = $publisherResult ? mysqli_fetch_assoc($publisherResult) : null;
+        // Запрос данных автора книги
+        $authorId = $bookData['author_id'];
+        $authorQuery = "SELECT first_name, last_name FROM authors WHERE author_id = $authorId";
+        $authorResult = mysqli_query($connection, $authorQuery);
+        $authorData = $authorResult ? mysqli_fetch_assoc($authorResult) : null;
 
-    $genreId = $bookData['genre_id'];
-    $genreQuery = "SELECT genre_name FROM Genres WHERE genre_id = $genreId";
-    $genreResult = mysqli_query($connection, $genreQuery);
-    $genreData = $genreResult ? mysqli_fetch_assoc($genreResult) : null;
+        // Запрос данных издательства книги
+        $publisherId = $bookData['publisher_id'];
+        $publisherQuery = "SELECT name FROM publishers WHERE publisher_id = $publisherId";
+        $publisherResult = mysqli_query($connection, $publisherQuery);
+        $publisherData = $publisherResult ? mysqli_fetch_assoc($publisherResult) : null;
 
-    $countryId = $bookData['country_id'];
-    $countryQuery = "SELECT country_name FROM country WHERE country_id = $countryId";
-    $countryResult = mysqli_query($connection, $countryQuery);
-    $countryData = $countryResult ? mysqli_fetch_assoc($countryResult) : null;
+        // Запрос данных жанра книги
+        $genreId = $bookData['genre_id'];
+        $genreQuery = "SELECT genre_name FROM genres WHERE genre_id = $genreId";
+        $genreResult = mysqli_query($connection, $genreQuery);
+        $genreData = $genreResult ? mysqli_fetch_assoc($genreResult) : null;
 
-    $publicationYear = date('Y', strtotime($bookData['publication_date']));
+        // Запрос данных страны книги
+        $countryId = $bookData['country_id'];
+        $countryQuery = "SELECT country_name FROM country WHERE country_id = $countryId";
+        $countryResult = mysqli_query($connection, $countryQuery);
+        $countryData = $countryResult ? mysqli_fetch_assoc($countryResult) : null;
 
-    $statusQuery = "SELECT status FROM user_book_status WHERE user_id = $userId AND book_id = $bookId";
-    $statusResult = mysqli_query($connection, $statusQuery);
-    $statusData = $statusResult ? mysqli_fetch_assoc($statusResult) : null;
-    $currentStatus = $statusData ? $statusData['status'] : 'не прочитано';
-} else {
-    die("Книга не найдена.");
-}
+        $publicationYear = date('Y', strtotime($bookData['publication_date']));
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $newStatus = $_POST['status'];
-
-    if ($statusData) {
-        $updateStatusQuery = "UPDATE user_book_status SET status = '$newStatus' WHERE user_id = $userId AND book_id = $bookId";
-        mysqli_query($connection, $updateStatusQuery);
+        // Запрос текущего статуса книги для пользователя
+        $statusQuery = "SELECT status FROM user_book_status WHERE user_id = $userId AND book_id = $bookId";
+        $statusResult = mysqli_query($connection, $statusQuery);
+        $statusData = $statusResult ? mysqli_fetch_assoc($statusResult) : null;
+        $currentStatus = $statusData ? $statusData['status'] : 'не прочитано';
     } else {
-        $insertStatusQuery = "INSERT INTO user_book_status (user_id, book_id, status) VALUES ($userId, $bookId, '$newStatus')";
-        mysqli_query($connection, $insertStatusQuery);
+        die("Книга не найдена.");
     }
 
-    header("Location: book-details.php?book_id=$bookId");
-    exit();
-}
+    // Обработка формы изменения статуса книги
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $newStatus = $_POST['status'];
 
-// Получение похожих книг
-$similarBooks = [];
-$similarQueries = [
-    "SELECT * FROM books WHERE author_id = $authorId AND book_id != $bookId ORDER BY RAND() LIMIT 1",
-    "SELECT * FROM books WHERE country_id = $countryId AND book_id != $bookId ORDER BY RAND() LIMIT 1",
-    "SELECT * FROM books WHERE genre_id = $genreId AND book_id != $bookId ORDER BY RAND() LIMIT 1"
-];
+        if ($statusData) {
+            $updateStatusQuery = "UPDATE user_book_status SET status = '$newStatus' WHERE user_id = $userId AND book_id = $bookId";
+            mysqli_query($connection, $updateStatusQuery);
+        } else {
+            $insertStatusQuery = "INSERT INTO user_book_status (user_id, book_id, status) VALUES ($userId, $bookId, '$newStatus')";
+            mysqli_query($connection, $insertStatusQuery);
+        }
 
-foreach ($similarQueries as $query) {
-    $similarResult = mysqli_query($connection, $query);
-    if ($similarResult && mysqli_num_rows($similarResult) > 0) {
-        $similarBooks[] = mysqli_fetch_assoc($similarResult);
+        header("Location: book-details.php?book_id=$bookId");
+        exit();
     }
-}
+
+    // Получение похожих книг
+    $similarBooks = [];
+    $similarQueries = [
+        "SELECT * FROM books WHERE author_id = $authorId AND book_id != $bookId ORDER BY RAND() LIMIT 1",
+        "SELECT * FROM books WHERE country_id = $countryId AND book_id != $bookId ORDER BY RAND() LIMIT 1",
+        "SELECT * FROM books WHERE genre_id = $genreId AND book_id != $bookId ORDER BY RAND() LIMIT 1"
+    ];
+
+    foreach ($similarQueries as $query) {
+        $similarResult = mysqli_query($connection, $query);
+        if ($similarResult && mysqli_num_rows($similarResult) > 0) {
+            $similarBooks[] = mysqli_fetch_assoc($similarResult);
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -186,6 +200,7 @@ foreach ($similarQueries as $query) {
     <div class="col-md-12">
         <h3>Похожие книги</h3>
         <div class="d-flex">
+            <!-- Вывод похожих книг -->
             <?php foreach ($similarBooks as $similarBook): ?>
                 <div class="card" style="width: 18rem;">
                     <div class="card-img">
