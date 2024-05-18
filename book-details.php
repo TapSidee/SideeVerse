@@ -173,6 +173,16 @@ while ($randomBook = mysqli_fetch_assoc($randomResult)) {
             object-fit: cover;
             aspect-ratio: 100 / 120;
         }
+        .footer {
+            z-index: 0;
+            position: relative;
+            padding: 10px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin-top: 20px;
+            color: #000;
+        }
     </style>
 </head>
 <body>
@@ -239,10 +249,10 @@ while ($randomBook = mysqli_fetch_assoc($randomResult)) {
             </div>
         </div>
     </div>
-    <br>
-    <div class="col-md-12"><br><br></div>
+    <!-- <br>
+    <div class="col-md-12"><br><br></div> -->
     <!-- Footer -->
-    <footer class="footer">
+    <!-- <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -256,7 +266,7 @@ while ($randomBook = mysqli_fetch_assoc($randomResult)) {
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> -->
 
     <!-- Подключение Bootstrap JavaScript (если необходимо) -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

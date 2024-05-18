@@ -17,6 +17,18 @@
     <title>LibrarySidee</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+                .footer {
+            z-index: 0;
+            position: relative;
+            padding: 10px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin-top: 20px;
+            color: #000;
+        }
+    </style>
 </head>
 
 <body>

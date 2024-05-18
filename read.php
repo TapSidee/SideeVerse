@@ -46,21 +46,7 @@
 
 <div class="col-md-12"><br><br></div>
 <!-- Footer -->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h5>SideeVerse: Knowledge Hub</h5>
-            </div>
-            <div class="col-md-3 text-right">
-                <h6><a href="project_details.php" class="footer-link">Сведения о проекте</a></h6>
-            </div>
-            <div class="col-md-3 text-right">
-                <h6><a href="feedback.php" class="footer-link">Обратная связь</a></h6>
-            </div>
-        </div>
-    </div>
-</footer>
+
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

@@ -43,6 +43,10 @@
                     <label for="password">Пароль:</label>
                     <input type="password" id="password" name="password" required>
                 </div>
+                <!-- Вывод ошибки при занятости никнейма -->
+                <?php if (isset($_GET['error'])): ?>
+                    <p class="error"><?php echo $_GET['error']; ?></p>
+                <?php endif; ?>
                 <!-- Кнопка для отправки формы регистрации -->
                 <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
             </form>

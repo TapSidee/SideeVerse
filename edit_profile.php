@@ -114,6 +114,16 @@
         .custom-file-label:hover::after {
             background-color: #dee2e6;
         }
+        .footer {
+            z-index: 0;
+            position: relative;
+            padding: 10px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin-top: 20px;
+            color: #000;
+        }
     </style>
 </head>
 <body>
@@ -124,7 +134,7 @@
                     <a href="index.php" class="back-button">На главную</a>
                 </div>
                 <div class="col-md-8 mt-2">
-                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> LSideeVerse: Knowledge Hub</h1>
+                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> SideeVerse: Knowledge Hub</h1>
                 </div>
             </div>
         </div>
