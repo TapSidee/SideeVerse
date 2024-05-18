@@ -32,7 +32,7 @@
     }
 
     // Статусы книг
-    $statuses = ['в планах', 'читаю', 'прочитано'];
+    $statuses = ['Запланировано', 'Читаю', 'Прочитано'];
     $booksByStatus = [];
 
     // Запрос книг по статусам для текущего пользователя
@@ -130,7 +130,7 @@
                     <a href="index.php" class="back-button">На главную</a>
                 </div>
                 <div class="col-md-4 mt-2">
-                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> LibrarySidee - Student library</h1>
+                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> SideeVerse: Knowledge Hub</h1>
                 </div>
             </div>
         </div>
@@ -156,7 +156,7 @@
                 <?php foreach ($statuses as $status): ?>
                     <div class="card mb-3">
                         <div class="card-header">
-                            <h4><?php echo ucfirst($status); ?></h4>
+                            <h4><?php echo ucfirst($status); ?> [<?php echo count($booksByStatus[$status]); ?>]</h4>
                         </div>
                         <div class="card-body">
                             <ul>
@@ -181,7 +181,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5>LibrarySidee - Student library</h5>
+                    <h5>SideeVerse: Knowledge Hub</h5>
                 </div>
                 <div class="col-md-3 text-right">
                     <h6><a href="project_details.php" class="footer-link">Сведения о проекте</a></h6>

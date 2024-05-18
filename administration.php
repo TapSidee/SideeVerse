@@ -20,6 +20,48 @@
     <title>LibrarySidee</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .custom-file-input {
+            position: relative;
+            width: 100%;
+            height: calc(1.5em + .75rem + 2px);
+            margin-bottom: 10px;
+            z-index: 2;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .custom-file-label {
+            display: inline-block;
+            width: 100%;
+            height: calc(1.5em + .75rem + 2px);
+            padding: .375rem .75rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            text-align: center;
+        }
+
+        .custom-file-label::after {
+            content: 'Выберите файл';
+            display: inline-block;
+            padding: .375rem .75rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #e9ecef;
+            border-left: 1px solid #ced4da;
+            border-radius: 0 .25rem .25rem 0;
+            cursor: pointer;
+        }
+
+        .custom-file-label:hover::after {
+            background-color: #dee2e6;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,7 +73,7 @@
                     <a href="index.php" class="back-button">На главную</a>
                 </div>
                 <div class="col-md-4 mt-2">
-                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> LibrarySidee - Student library</h1>
+                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> SideeVerse: Knowledge Hub</h1>
                 </div>
                 <div class="col-md-4 mt-2">
                 </div>
@@ -44,44 +86,48 @@
             <div class="col-md-4">
                 <h2>Форма ввода данных о книгах</h2>
                 <!-- Форма для добавления книги -->
-                <form action="includes/process_book_data.php" method="post">
+                <form action="includes/process_book_data.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="title">Название книги:</label>
-                        <input type="text" id="title" name="title" required>
+                        <input type="text" id="title" name="title" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="text">Описание:</label>
-                        <input type="text" id="text" name="text" required>
+                        <input type="text" id="text" name="text" class="form-control" required>
                     </div>
-                    <div class="form-group">
-                        <label for="image">Изображение:</label>
-                        <input type="text" id="image" name="image" required>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="author_id">ID автора:</label>
-                        <input type="number" id="author_id" name="author_id" required>
+                        <input type="number" id="author_id" name="author_id" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="genre_id">ID жанра:</label>
-                        <input type="number" id="genre_id" name="genre_id" required>
+                        <input type="number" id="genre_id" name="genre_id" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="country_id">ID страны:</label>
-                        <input type="number" id="country_id" name="country_id" required>
+                        <input type="number" id="country_id" name="country_id" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="publication_date">Год выпуска:</label>
-                        <input type="text" id="publication_date" name="publication_date" required title="Год выпуска в формате ГГГГ-ММ-ДД">
+                        <input type="text" id="publication_date" name="publication_date" class="form-control" required title="Год выпуска в формате ГГГГ-ММ-ДД">
                     </div>
                     <div class="form-group">
                         <label for="quantity">Количество книг:</label>
-                        <input type="number" id="quantity" name="quantity" required>
+                        <input type="number" id="quantity" name="quantity" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="publisher_id">ID издательства:</label>
-                        <input type="number" id="publisher_id" name="publisher_id" required>
+                        <input type="number" id="publisher_id" name="publisher_id" class="form-control" required>
                     </div>
-                    <button type="submit">Добавить книгу</button>
+                    <div class="form-group">
+                        <label for="image">Изображение:</label>
+                        <div class="position-relative">
+                            <input type="file" id="image" name="image" class="custom-file-input" required>
+                            <label class="custom-file-label" for="image"></label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить книгу</button>
                 </form>
                 <br><br><br><br><br><br><br>
 
@@ -140,7 +186,7 @@
             <div class="col-md-8">
                 <!-- Таблицы для отображения данных -->
                 <h2>Данные о книгах</h2>
-                <div style="height: 875px; overflow-y: auto;">
+                <div style="height: 775px; overflow-y: auto;">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -325,7 +371,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5>LibrarySidee - Student library</h5>
+                    <h5>SideeVerse: Knowledge Hub</h5>
                 </div>
                 <div class="col-md-3 text-right">
                     <h6><a href="project_details.php" class="footer-link">Сведения о проекте</a></h6>

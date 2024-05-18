@@ -26,12 +26,12 @@
 <header>
     <div class="header">
         <div class="row">
-            <div class="col-md-3 mt-2">
+            <div class="col-md-4 mt-2">
                 <!-- Кнопка для возврата на главную страницу -->
                 <a href="index.php" class="back-button">На главную</a>
             </div>
-            <div class="col-md-5 mt-2">
-                <h1><img src="assets/images/logo.png" alt="logo" class="logo"> LibrarySidee - Student library</h1>
+            <div class="col-md-4 mt-2">
+                <h1><img src="assets/images/logo.png" alt="logo" class="logo"> SideeVerse: Knowledge Hub</h1>
             </div>
             <div class="col-md-4 mt-2"></div>
         </div>
@@ -78,10 +78,10 @@
             <p>Адрес: 38.8976763 -77.0365298</p>
             <p>Email: skyewhowalker@gmail.com or shaoo0@gmail.com</p>
             <p>Телефон: 8 (846) 278-13-40</p>
-            <p>Telegram: TxpSidee_</p>
-            <p>Vk: TxpSidee_</p>
-            <p>Twitch: TxpSidee_</p>
-            <p>GitHub: TxpSidee_</p>
+            <p>Telegram: TxpSidee</p>
+            <p>Vk: TxpSidee</p>
+            <p>Twitch: TxpSidee</p>
+            <p>GitHub: TxpSidee</p>
         </div>
     </div>
 </div>
@@ -91,7 +91,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h5>LibrarySidee - Student library</h5>
+                <h5>SideeVerse: Knowledge Hub</h5>
             </div>
             <div class="col-md-3 text-right">
                 <h6><a href="project_details.php" class="footer-link">Сведения о проекте</a></h6>

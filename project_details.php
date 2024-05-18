@@ -23,11 +23,11 @@
     <header>
         <div class="header">
             <div class="row">
-                <div class="col-md-3 mt-2">
+                <div class="col-md-4 mt-2">
                     <a href="index.php" class="back-button">На главную</a>
                 </div>
-                <div class="col-md-5 mt-2">
-                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> LibrarySidee - Student library</h1>
+                <div class="col-md-4 mt-2">
+                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> SideeVerse: Knowledge Hub</h1>
                 </div>
                 <div class="col-md-4 mt-2">
                 </div>
@@ -99,7 +99,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5>LibrarySidee - Student library</h5>
+                    <h5>SideeVerse: Knowledge Hub</h5>
                 </div>
                 <div class="col-md-3 text-right">
                     <h6><a href="project_details.php" class="footer-link">Сведения о проекте</a></h6>

@@ -72,6 +72,49 @@
     <title>LibrarySidee - Редактирование профиля</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .custom-file-input {
+            position: relative;
+            width: 100%;
+            height: calc(1.5em + .75rem + 2px);
+            margin-bottom: 10px;
+            z-index: 2;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .custom-file-label {
+            display: inline-block;
+            width: 100%;
+            height: calc(1.5em + .75rem + 2px);
+            margin-bottom: 0;
+            padding: .375rem .75rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            text-align: center;
+        }
+
+        .custom-file-label::after {
+            content: 'Выберите файл';
+            display: inline-block;
+            padding: .375rem .75rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #e9ecef;
+            border-left: 1px solid #ced4da;
+            border-radius: 0 .25rem .25rem 0;
+            cursor: pointer;
+        }
+
+        .custom-file-label:hover::after {
+            background-color: #dee2e6;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -81,7 +124,7 @@
                     <a href="index.php" class="back-button">На главную</a>
                 </div>
                 <div class="col-md-8 mt-2">
-                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> LibrarySidee - Student library</h1>
+                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> LSideeVerse: Knowledge Hub</h1>
                 </div>
             </div>
         </div>
@@ -105,8 +148,10 @@
                     <div class="form-group">
                         Email: <input type="email" name="email" value="<?php echo $user['email']; ?>" class="form-control">
                     </div>
-                    <div class="form-group">
-                        Аватар: <input type="file" name="avatar" class="form-control">
+                    Изображение профиля:<br>
+                    <div class="form-group position-relative">
+                        <input type="file" name="avatar" class="custom-file-input" id="avatar">
+                        <label class="custom-file-label" for="avatar"></label>
                     </div>
                     <div class="form-group">
                         Пароль: <input type="password" name="password" class="form-control">

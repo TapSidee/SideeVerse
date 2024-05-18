@@ -21,6 +21,61 @@ session_start();
     <title>LibrarySidee</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .footer {
+            z-index: 0;
+            position: relative;
+            padding: 10px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin-top: 20px;
+            color: #000;
+        }
+
+        .pagination .active .page-link {
+            z-index: 1;
+            position: relative;
+            background-color: #007bff; /* Цвет фона для активной страницы */
+            color: #fff; /* Цвет текста для активной страницы */
+            border-color: #007bff; /* Цвет границы для активной страницы */
+        }
+
+        .btn-secondary-custom {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+            margin-left: 1px; /* Добавляем отступ между кнопками */
+        }
+
+        .btn-secondary-custom:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            color: #fff;
+        }
+
+        .header .logo {
+            max-width: 50px;
+            margin-right: 10px;
+        }
+
+        .header h1 {
+            display: flex;
+            align-items: center;
+        }
+
+        .header h1 span {
+            font-size: 38x;
+        }
+        .custom-button-primary {
+            border: 1px solid rgba(0, 123, 255, 0.5) !important; /* Рамка на пол оттенка темнее синего цвета */
+        }
+
+        .custom-button-secondary {
+            border: 1px solid rgba(108, 117, 125, 0.5) !important; /* Рамка на пол оттенка темнее серого цвета */
+            margin-left: 1px; /* Добавляем отступ между кнопками */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -28,7 +83,7 @@ session_start();
             <div class="row">
                 <div class="col-md-3 mt-2"></div>
                 <div class="col-md-5 mt-2">
-                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> LibrarySidee - Student library</h1>
+                    <h1><img src="assets/images/logo.png" alt="logo" class="logo"> <span>SideeVerse: Knowledge Hub</span></h1>
                 </div>
                 <div class="col-md-4 mt-2">
                     <?php if(isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
@@ -55,8 +110,8 @@ session_start();
                         <div class="input-group" style="width: 100%;">
                             <input type="text" name="search" placeholder="Поиск по названию или автору" class="form-control">
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary">Найти</button>
-                                <button type="button" onclick="resetFilters()" class="btn btn-secondary">Сбросить</button>
+                                <button type="submit" class="btn btn-primary custom-button-primary">Найти</button>
+                                <button type="button" onclick="resetFilters()" class="btn btn-secondary-custom custom-button-secondary">Сбросить</button>
                             </div>
                         </div>
                     </form>
@@ -259,7 +314,7 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5>LibrarySidee - Student library</h5>
+                    <h5>SideeVerse: Knowledge Hub</h5>
                 </div>
                 <div class="col-md-3 text-right">
                     <h6><a href="project_details.php" class="footer-link">Сведения о проекте</a></h6>
