@@ -35,12 +35,13 @@
         $result = mysqli_query($connection, $query);
 
         if ($result) {
-            // Успешно добавлено, перенаправление обратно на страницу администрации
-            header('Location: ../administration.php');
+            // Успешно добавлено
+            header('Location: ../administration.php?conf=Успешно добавлено'); // Перенаправление обратно на страницу администрации
             exit();
         } else {
             // Ошибка при выполнении запроса
-            echo 'Ошибка: ' . mysqli_error($connection);
+            header("Location: ../administration.php?error=Ошибка: " . $connection->error);
+            exit();
         }
     } else {
         // Если запрос не является POST, перенаправление на страницу администрации
