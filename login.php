@@ -73,7 +73,7 @@
                     $role = $user_data['role'];
 
                     if ($role == 'user') { 
-                        header("Location: index.php");
+                        header("Location: profile.php");
                         exit();
                     } elseif ($role == 'admin') { 
                         header("Location: administration.php");
