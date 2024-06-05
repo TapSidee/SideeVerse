@@ -17,7 +17,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LibrarySidee</title>
+    <title>SideeVerse</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <style>
@@ -122,10 +122,7 @@
                         <label for="publication_date">Год выпуска:</label>
                         <input type="text" id="publication_date" name="publication_date" class="form-control" required title="Год выпуска в формате ГГГГ-ММ-ДД">
                     </div>
-                    <div class="form-group">
-                        <label for="quantity">Количество книг:</label>
-                        <input type="number" id="quantity" name="quantity" class="form-control" required>
-                    </div>
+
                     <div class="form-group">
                         <label for="publisher_id">ID издательства:</label>
                         <input type="number" id="publisher_id" name="publisher_id" class="form-control" required>
@@ -139,7 +136,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Добавить книгу</button>
                 </form>
-                <br><br><br><br><br><br><br>
+                <br><br><br><br><br>
 
                 <h2>Форма ввода данных об авторах</h2>
                 <!-- Форма для добавления автора -->
@@ -154,7 +151,7 @@
                     </div>
                     <button type="submit">Добавить автора</button>
                 </form>
-                <br><br><br><br><br><br><br>
+                <br><br><br><br><br>
 
                 <h2>Форма ввода данных об издательствах</h2>
                 <!-- Форма для добавления издательства -->
@@ -169,7 +166,7 @@
                     </div>
                     <button type="submit">Добавить издательство</button>
                 </form>
-                <br><br><br><br><br><br><br>
+                <br><br><br><br><br>
 
                 <h2>Форма ввода данных о странах</h2>
                 <!-- Форма для добавления страны -->
@@ -180,7 +177,7 @@
                     </div>
                     <button type="submit">Добавить страну</button>
                 </form>
-                <br><br><br><br><br><br><br>
+                <br><br><br><br><br>
 
                 <h2>Форма ввода данных о жанрах</h2>
                 <!-- Форма для добавления жанра -->
@@ -196,7 +193,7 @@
             <div class="col-md-8">
                 <!-- Таблицы для отображения данных -->
                 <h2>Данные о книгах</h2>
-                <div style="height: 775px; overflow-y: auto;">
+                <div style="height: 675px; overflow-y: auto;">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -239,7 +236,7 @@
                         </tbody>
                     </table>
                 </div>
-                <br><br><br><br><br><br>
+                <br><br><br><br>
 
                 <h2>Данные об авторах</h2>
                 <div style="height: 250px; overflow-y: auto;">
@@ -273,7 +270,7 @@
                         </tbody>
                     </table>
                 </div>
-                <br><br><br><br><br><br>
+                <br><br><br><br>
 
                 <h2>Данные о издательствах</h2>
                 <div style="height: 250px; overflow-y: auto;">
@@ -307,7 +304,7 @@
                         </tbody>
                     </table>
                 </div>
-                <br><br><br><br><br><br>
+                <br><br><br><br>
 
                 <h2>Данные о странах</h2>
                 <div style="height: 200px; overflow-y: auto;">
@@ -339,7 +336,7 @@
                         </tbody>
                     </table>
                 </div>
-                <br><br><br><br><br>
+                <br><br><br><br>
 
                 <h2>Данные о жанрах</h2>
                 <div style="height: 200px; overflow-y: auto;">

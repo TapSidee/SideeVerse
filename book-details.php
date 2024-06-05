@@ -114,7 +114,7 @@ while ($randomBook = mysqli_fetch_assoc($randomResult)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LibrarySidee</title>
+    <title>SideeVerse</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <style>
@@ -205,8 +205,16 @@ while ($randomBook = mysqli_fetch_assoc($randomResult)) {
         <div class="col-md-4">
             <img class="card-image" src="assets/images/<?php echo $bookData['image']; ?>" alt="Изображение книги">
             <div class="action-buttons"><br>
-                <a href="read.php?title=<?php echo urlencode($bookData['title']); ?>" class="btn btn-secondary">Читать</a>
-                <a href="assets/files/nan.pdf" class="btn btn-secondary" download>Скачать</a>
+                <?php if ($bookId == 1): ?>
+                    <a href="assets/files/pride_and_prejudice.php?title=<?php echo urlencode($bookData['title']); ?>" class="btn btn-secondary">Читать</a>
+                    <a href="assets/files/pride_and_prejudice.pdf" class="btn btn-secondary" download>Скачать</a>
+                <?php elseif ($bookId == 2): ?>
+                    <a href="assets/files/sense_and_sensibility.php?title=<?php echo urlencode($bookData['title']); ?>" class="btn btn-secondary">Читать</a>
+                    <a href="assets/files/sense_and_sensibility.pdf" class="btn btn-secondary" download>Скачать</a>
+                <?php else: ?>
+                    <a href="read.php?title=<?php echo urlencode($bookData['title']); ?>" class="btn btn-secondary">Читать</a>
+                    <a href="assets/files/nan.pdf" class="btn btn-secondary" download>Скачать</a>
+                <?php endif; ?>
             </div>
             <form method="POST" action="">
                 <br><label for="status"><h5>Статус прочтения:</h5></label>

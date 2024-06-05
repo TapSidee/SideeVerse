@@ -18,7 +18,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LibrarySidee</title>
+    <title>SideeVerse</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="assets/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="assets/css/styles.css">
@@ -37,16 +37,16 @@ session_start();
         .pagination .active .page-link {
             z-index: 1;
             position: relative;
-            background-color: #007bff; /* Цвет фона для активной страницы */
-            color: #fff; /* Цвет текста для активной страницы */
-            border-color: #007bff; /* Цвет границы для активной страницы */
+            background-color: #007bff;
+            color: #fff; 
+            border-color: #007bff; 
         }
 
         .btn-secondary-custom {
             background-color: #007bff;
             border-color: #007bff;
             color: #fff;
-            margin-left: 1px; /* Добавляем отступ между кнопками */
+            margin-left: 1px;
         }
 
         .btn-secondary-custom:hover {
@@ -69,12 +69,12 @@ session_start();
             font-size: 38x;
         }
         .custom-button-primary {
-            border: 1px solid rgba(0, 123, 255, 0.5) !important; /* Рамка на пол оттенка темнее синего цвета */
+            border: 1px solid rgba(0, 123, 255, 0.5) !important;
         }
 
         .custom-button-secondary {
-            border: 1px solid rgba(108, 117, 125, 0.5) !important; /* Рамка на пол оттенка темнее серого цвета */
-            margin-left: 1px; /* Добавляем отступ между кнопками */
+            border: 1px solid rgba(108, 117, 125, 0.5) !important; 
+            margin-left: 1px;
         }
     </style>
 </head>
