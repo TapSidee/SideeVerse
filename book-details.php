@@ -211,6 +211,24 @@ while ($randomBook = mysqli_fetch_assoc($randomResult)) {
                 <?php elseif ($bookId == 2): ?>
                     <a href="assets/files/sense_and_sensibility.php?title=<?php echo urlencode($bookData['title']); ?>" class="btn btn-secondary">Читать</a>
                     <a href="assets/files/sense_and_sensibility.pdf" class="btn btn-secondary" download>Скачать</a>
+                <?php elseif ($bookId == 11): ?>
+                    <a href="assets/files/anna_karenina.php?title=<?php echo urlencode($bookData['title']); ?>" class="btn btn-secondary">Читать</a>
+                    <a href="assets/files/anna_karenina.pdf" class="btn btn-secondary" download>Скачать</a>
+                <?php elseif ($bookId == 21): ?>
+                    <a href="assets/files/anne_of_avonlea.php?title=<?php echo urlencode($bookData['title']); ?>" class="btn btn-secondary">Читать</a>
+                    <a href="assets/files/anne_of_avonlea.pdf" class="btn btn-secondary" download>Скачать</a>
+                <?php elseif ($bookId == 31): ?>
+                    <a href="assets/files/anne_of_green_gables.php?title=<?php echo urlencode($bookData['title']); ?>" class="btn btn-secondary">Читать</a>
+                    <a href="assets/files/anne_of_green_gables.pdf" class="btn btn-secondary" download>Скачать</a>
+                <?php elseif ($bookId == 41): ?>
+                    <a href="assets/files/one_hundred_years_of_solitude.php?title=<?php echo urlencode($bookData['title']); ?>" class="btn btn-secondary">Читать</a>
+                    <a href="assets/files/one_hundred_years_of_solitude.pdf" class="btn btn-secondary" download>Скачать</a>
+                <?php elseif ($bookId == 42): ?>
+                    <a href="assets/files/take_a_breath_of_air.php?title=<?php echo urlencode($bookData['title']); ?>" class="btn btn-secondary">Читать</a>
+                    <a href="assets/files/take_a_breath_of_air.pdf" class="btn btn-secondary" download>Скачать</a>
+                <?php elseif ($bookId == 50): ?>
+                    <a href="assets/files/the_master_and_margarita.php?title=<?php echo urlencode($bookData['title']); ?>" class="btn btn-secondary">Читать</a>
+                    <a href="assets/files/the_master_and_margarita.pdf" class="btn btn-secondary" download>Скачать</a>
                 <?php else: ?>
                     <a href="read.php?title=<?php echo urlencode($bookData['title']); ?>" class="btn btn-secondary">Читать</a>
                     <a href="assets/files/nan.pdf" class="btn btn-secondary" download>Скачать</a>
